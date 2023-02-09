@@ -546,6 +546,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Location: 
   galName: 
+  g1ConvoMark: 0
+  g1ChoiceMark: 0
+  g1ChoiceMark2: 1
+  g1Convo: []
+  g1Choice1: []
+  g1Choice2: []
+  g1Choice3: []
 --- !u!4 &1435363699
 Transform:
   m_ObjectHideFlags: 0
@@ -592,10 +599,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingTown: {fileID: 1127828658281062859, guid: cd4ed85b86034a64bbce95cf9d964e33, type: 3}
   Club: {fileID: 2454395186198501287, guid: a047c4a2231c488468f1bdf5414fbe85, type: 3}
+  Gym: {fileID: 3826372684152583805, guid: 5c1fe515e88dc5b4faf54ae390937fa9, type: 3}
   Conversation: {fileID: 49523707292509066, guid: 3c4a54bcae26a834e923a9100abdc472, type: 3}
   Gal1: {fileID: 352148748907039325, guid: 7f9314c1a07c78843b9556e3ef7d3249, type: 3}
-  Gal2: {fileID: 0}
-  clubBackground: {fileID: 874364729536172591, guid: 696e071bc6ac563469ed43049ac93958, type: 3}
+  Gal2: {fileID: 5163324434326636486, guid: 0be0f943f1c256d41b21208fcb255081, type: 3}
 --- !u!4 &1955596728
 Transform:
   m_ObjectHideFlags: 0

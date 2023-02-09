@@ -13,16 +13,13 @@ public class buttonScript : MonoBehaviour
 
     public GameObject startingTown;
     public GameObject Club;
+    public GameObject Gym;
     public GameObject Conversation;
 
     //Portrait Gal Game Objects
 
     public GameObject Gal1;
     public GameObject Gal2;
-
-    //Conversation Game Objects
-
-    public GameObject tapBox;
 
     // Start is called before the first frame update
     void Start()
@@ -80,14 +77,36 @@ public class buttonScript : MonoBehaviour
 
                 }
 
+                if (hit.collider.gameObject.name == "Gym")
+                {
+
+                    GameObject Town = GameObject.Find("Town(Clone)");
+                    sScript.Location = "Gym";
+                    Destroy(Town);
+                    Instantiate(Gym, new Vector3(0,0,0), transform.rotation);
+
+                }
+
                 //Club Buttons
 
                 if (hit.collider.gameObject.name == "Exit Button")
                 {
 
-                    GameObject Club = GameObject.Find("Club(Clone)");
-                    Destroy(Club);
-                    Instantiate(startingTown, new Vector3(0,0,0), transform.rotation);
+                    if(sScript.Location == "Club"){
+
+                        GameObject Club = GameObject.Find("Club(Clone)");
+                        Destroy(Club);
+                        Instantiate(startingTown, new Vector3(0,0,0), transform.rotation);
+
+                    }
+
+                    if(sScript.Location == "Gym"){
+
+                        GameObject Gym = GameObject.Find("Gym(Clone)");
+                        Destroy(Gym);
+                        Instantiate(startingTown, new Vector3(0,0,0), transform.rotation);
+
+                    }
 
                 }
 
@@ -103,7 +122,43 @@ public class buttonScript : MonoBehaviour
                     eButton.transform.position += new Vector3(10,0,0);
                     GameObject gal1P = GameObject.Find("Gal 1 Portrait");
                     gal1P.transform.position += new Vector3(10,0,0);
+                    GameObject tBoxes = GameObject.Find("Text Box");
+                    tBoxes.transform.position += new Vector3(-20,0,0);
+                    GameObject tapBox = GameObject.Find("Tap Box");
+                    tapBox.transform.position += new Vector3(-20,0,0);
+                    GameObject choice1 = GameObject.Find("Choice 1");
+                    choice1.transform.position += new Vector3(-20,0,0);
+                    GameObject choice2 = GameObject.Find("Choice 2");
+                    choice2.transform.position += new Vector3(-20,0,0);
+                    GameObject choice3 = GameObject.Find("Choice 3");
+                    choice3.transform.position += new Vector3(-20,0,0);
                     sScript.galName = "Gal 1";
+
+                }
+
+                if (hit.collider.gameObject.name == "Gal 2 Portrait")
+                {
+                    
+                    Instantiate(Conversation, new Vector3(0,0,-1.1f), transform.rotation);
+                    Instantiate(Gal2, new Vector3(0,-.7f,-1), transform.rotation);
+                    GameObject Convo = GameObject.Find("Conversations(Clone)");
+                    GameObject gal2 = GameObject.Find("Gal 2(Clone)");
+                    gal2.transform.parent = Convo.transform;
+                    GameObject eButton = GameObject.Find("Exit Button");
+                    eButton.transform.position += new Vector3(10,0,0);
+                    GameObject gal2P = GameObject.Find("Gal 2 Portrait");
+                    gal2P.transform.position += new Vector3(10,0,0);
+                    GameObject tBoxes = GameObject.Find("Text Box");
+                    tBoxes.transform.position += new Vector3(-20,0,0);
+                    GameObject tapBox = GameObject.Find("Tap Box");
+                    tapBox.transform.position += new Vector3(-20,0,0);
+                    GameObject choice1 = GameObject.Find("Choice 1");
+                    choice1.transform.position += new Vector3(-20,0,0);
+                    GameObject choice2 = GameObject.Find("Choice 2");
+                    choice2.transform.position += new Vector3(-20,0,0);
+                    GameObject choice3 = GameObject.Find("Choice 3");
+                    choice3.transform.position += new Vector3(-20,0,0);
+                    sScript.galName = "Gal 2";
 
                 }
 
@@ -122,6 +177,172 @@ public class buttonScript : MonoBehaviour
                         GameObject gal1P = GameObject.Find("Gal 1 Portrait");
                         gal1P.transform.position += new Vector3(-10,0,0);
                         sScript.galName = "";
+
+                    }
+
+                    if(sScript.galName == "Gal 2"){
+
+                        GameObject gal2P = GameObject.Find("Gal 2 Portrait");
+                        gal2P.transform.position += new Vector3(-10,0,0);
+                        sScript.galName = "";
+
+                    }
+
+                }
+
+                if (hit.collider.gameObject.name == "Talk Button")
+                {
+
+                    GameObject tButton = GameObject.Find("Talk Button");
+                    tButton.transform.position += new Vector3(-20,0,0);
+                    GameObject lButton = GameObject.Find("Leave Button");
+                    lButton.transform.position += new Vector3(10,0,0);
+                    GameObject tBoxes = GameObject.Find("Text Box");
+                    tBoxes.transform.position += new Vector3(20,0,0);
+                    GameObject tapBox = GameObject.Find("Tap Box");
+                    tapBox.transform.position += new Vector3(20,0,0);
+                    Animator textAnim = tBoxes.GetComponent<Animator>();
+
+                    if(sScript.galName == "Gal 1"){
+
+                        textAnim.Play(sScript.g1Convo[sScript.g1ConvoMark]);
+
+                    }
+                    
+                }
+
+                if (hit.collider.gameObject.name == "Tap Box")
+                {
+
+                    if(sScript.galName == "Gal 1"){
+
+                        sScript.g1ConvoMark++;
+
+                        if(sScript.g1Convo[sScript.g1ConvoMark] == "Break"){
+
+                            sScript.g1ConvoMark++;
+                            GameObject tapBox = GameObject.Find("Tap Box");
+                            tapBox.transform.position += new Vector3(-20,0,0);
+                            GameObject choice1 = GameObject.Find("Choice 1");
+                            Animator choice1Anim = choice1.GetComponent<Animator>();
+                            choice1Anim.Play(sScript.g1Choice1[sScript.g1ChoiceMark]);
+                            choice1.transform.position += new Vector3(20,0,0);
+                            GameObject choice2 = GameObject.Find("Choice 2");
+                            Animator choice2Anim = choice2.GetComponent<Animator>();
+                            choice2Anim.Play(sScript.g1Choice2[sScript.g1ChoiceMark]);
+                            choice2.transform.position += new Vector3(20,0,0);
+                            GameObject choice3 = GameObject.Find("Choice 3");
+                            Animator choice3Anim = choice3.GetComponent<Animator>();
+                            choice3Anim.Play(sScript.g1Choice3[sScript.g1ChoiceMark]);
+                            choice3.transform.position += new Vector3(20,0,0);
+
+                        }
+
+                        if(sScript.g1Convo[sScript.g1ConvoMark] == "End"){
+
+                            
+                            GameObject tBoxes = GameObject.Find("Text Box");
+                            tBoxes.transform.position += new Vector3(-20,0,0);
+                            GameObject tButton = GameObject.Find("Talk Button");
+                            tButton.transform.position += new Vector3(20,0,0);
+                            GameObject tapBox = GameObject.Find("Tap Box");
+                            tapBox.transform.position += new Vector3(20,0,0);
+                            GameObject lButton = GameObject.Find("Leave Button");
+                            lButton.transform.position += new Vector3(-10,0,0);
+
+                            while(sScript.g1Convo[sScript.g1ConvoMark] != "Stop"){
+
+                                sScript.g1ConvoMark++;
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                if (hit.collider.gameObject.name == "Choice 1")
+                {
+
+                    if(sScript.galName == "Gal 1"){
+
+                        sScript.g1ChoiceMark++;
+
+                        if(sScript.g1Choice1[sScript.g1ChoiceMark] == "Break"){
+
+                            sScript.g1ChoiceMark++;
+                            GameObject choice1 = GameObject.Find("Choice 1");
+                            choice1.transform.position += new Vector3(-20,0,0);
+                            GameObject choice2 = GameObject.Find("Choice 2");
+                            choice2.transform.position += new Vector3(-20,0,0);
+                            GameObject choice3 = GameObject.Find("Choice 3");
+                            choice3.transform.position += new Vector3(-20,0,0);
+                            GameObject tBoxes = GameObject.Find("Text Box");
+                            GameObject tapBox = GameObject.Find("Tap Box");
+                            tapBox.transform.position += new Vector3(20,0,0);
+                            Animator textAnim = tBoxes.GetComponent<Animator>();
+                            textAnim.Play(sScript.g1Convo[sScript.g1ConvoMark]);
+
+                        }
+
+                    }
+
+                }
+
+                if (hit.collider.gameObject.name == "Choice 2")
+                {
+
+                    if(sScript.galName == "Gal 1"){
+
+                        sScript.g1ChoiceMark++;
+
+                        if(sScript.g1Choice2[sScript.g1ChoiceMark] == "Break"){
+
+                            sScript.g1ChoiceMark++;
+                            sScript.g1ConvoMark += 2;
+                            GameObject choice1 = GameObject.Find("Choice 1");
+                            choice1.transform.position += new Vector3(-20,0,0);
+                            GameObject choice2 = GameObject.Find("Choice 2");
+                            choice2.transform.position += new Vector3(-20,0,0);
+                            GameObject choice3 = GameObject.Find("Choice 3");
+                            choice3.transform.position += new Vector3(-20,0,0);
+                            GameObject tBoxes = GameObject.Find("Text Box");
+                            GameObject tapBox = GameObject.Find("Tap Box");
+                            tapBox.transform.position += new Vector3(20,0,0);
+                            Animator textAnim = tBoxes.GetComponent<Animator>();
+                            textAnim.Play(sScript.g1Convo[sScript.g1ConvoMark]);
+
+                        }
+
+                    }
+
+                }
+
+                if (hit.collider.gameObject.name == "Choice 3")
+                {
+
+                    if(sScript.galName == "Gal 1"){
+
+                        sScript.g1ChoiceMark++;
+
+                        if(sScript.g1Choice2[sScript.g1ChoiceMark] == "Break"){
+
+                            sScript.g1ChoiceMark++;
+                            sScript.g1ConvoMark += 4;
+                            GameObject choice1 = GameObject.Find("Choice 1");
+                            choice1.transform.position += new Vector3(-20,0,0);
+                            GameObject choice2 = GameObject.Find("Choice 2");
+                            choice2.transform.position += new Vector3(-20,0,0);
+                            GameObject choice3 = GameObject.Find("Choice 3");
+                            choice3.transform.position += new Vector3(-20,0,0);
+                            GameObject tBoxes = GameObject.Find("Text Box");
+                            GameObject tapBox = GameObject.Find("Tap Box");
+                            tapBox.transform.position += new Vector3(20,0,0);
+                            Animator textAnim = tBoxes.GetComponent<Animator>();
+                            textAnim.Play(sScript.g1Convo[sScript.g1ConvoMark]);
+
+                        }
 
                     }
 
